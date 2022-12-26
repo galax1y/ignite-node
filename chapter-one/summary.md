@@ -92,7 +92,7 @@ A aplicação deve permitir que as funcionalidades do cliente sejam extendidas n
 
 ## `Express`
 
-É um framework que fornece recursos para construção de servidores web.
+**É um framework que fornece recursos para construção de servidores web.**
 
 Instalar express: `npm i express`
 
@@ -113,3 +113,60 @@ app.get("/", (request, response) => {
   response.send("Hello World");
 });
 ```
+
+Cada mudança no código precisa reiniciar o servidor.
+
+Nodemon é uma dependência de desenvolvimento que faz esse reload na aplicação e aumenta a produtividade.
+
+Instalando como dependência de desenvolvimento: `npm i nodemon -D`
+
+Adicionando em `package.json` pra ter um atalho mais fácil. Caso contrário seria `nodemon src/index.js`
+
+```json
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+```
+
+E, por último, rodar com `npm run dev`.
+
+Pronto, agora as mudanças podem ser feitas sem desligar o servidor.
+
+Configurando as outras rotas principais:
+
+```js
+app.post("/users", (request, response) => {
+  users.push(request.body);
+  response.send("User added.");
+});
+```
+
+```js
+app.put(`/users/:id`, (request, response) => {
+  let userId = request.params.id;
+
+  users = users.map((user) => {
+    if (user.id === userId) return request.body;
+    else return user;
+  });
+
+  response.send(`Put recebido.`);
+});
+```
+
+```js
+app.delete(`/users/:id`, function (request, response) {
+  let userIdToDelete = request.params.id;
+
+  users = users.filter((user) => user.id !== userIdToDelete);
+  response.send("Usuário deletado");
+});
+```
+
+Cuidado com a rota, tem que ser escrita com todas as barras: `/users/:id`
+
+O `:id` é a maneira de coletar o `Route Parameter` **`id`** é acessado por `request.params.id`.
+
+`Route Parameters` são usados para identificar um recurso, são acessados com `request.params`
+`Query Parameters` são usados para paginação / filtros, são acessados com `request.query` e são opcionais.
+`Body Parameters` são os objetos (usualmente JSON) usados nas ações de inserção / alteração, são acessados com `request.body`.
