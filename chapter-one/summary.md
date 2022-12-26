@@ -170,3 +170,66 @@ O `:id` é a maneira de coletar o `Route Parameter` **`id`** é acessado por `re
 `Route Parameters` são usados para identificar um recurso, são acessados com `request.params`
 `Query Parameters` são usados para paginação / filtros, são acessados com `request.query` e são opcionais.
 `Body Parameters` são os objetos (usualmente JSON) usados nas ações de inserção / alteração, são acessados com `request.body`.
+
+---
+
+### `Detalhes da implementação do primeiro projeto.`
+
+Função do JavaScript `Array.prototype.some()`: É como um `map`, mas retorna um booleano `true` caso qualquer um dos elementos da Array cumpra uma condição.
+
+Função do JavaScript `Array.prototype.find()`: É como um `map` mas retorna o primeiro objeto encontrado no Array que cumpra uma condição.
+
+Retornando status codes:
+
+```js
+if (customerAlreadyExists) {
+  return response.status(400).json({ error: "Customer already exists" });
+}
+```
+
+Na recepção parâmetros, sempre tá guardando em variáveis por desestruturação.
+
+#### `Middleware`
+
+Um middleware é um trecho de código que fica **entre o `request` e a `response`**
+
+Sintaxe: `app.get(rota, middleware, função)`
+
+Criando o middleware:
+
+```js
+function verifyIfExistsAccountCPF(request, response, next) {
+  const { cpf } = request.headers;
+
+  const customer = customers.find((customer) => customer.cpf === cpf);
+
+  if (!customer) {
+    return response.status(400).json({ error: "Customer not found" });
+  }
+
+  // habilita o acesso à variável customer para a função next
+  request.customer = customer;
+
+  return next();
+}
+```
+
+Aplicando middleware em uma rota específica:
+
+```js
+app.get("/statement/", verifyIfExistsAccountCPF, (request, response) => {
+  const { customer } = request;
+
+  return response.json(customer.statement);
+});
+```
+
+Aplicando middleware em todas as rotas:
+
+```js
+app.use(express.json());
+```
+
+`reduce` é um método que itera todos elementos de um array aplicando uma função e a "reduzindo" a um único valor.
+
+`reduce( (accumulator, operation ) => {} )`
