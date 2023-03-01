@@ -3,7 +3,6 @@ import { SpecificationsRepository } from '../modules/cars/repositories/Specifica
 import { createSpecificationController } from '../modules/cars/useCases/createSpecification'
 
 const routes = Router()
-const specificationsRepository = new SpecificationsRepository()
 
 // Create specification
 routes.post('/', (request, response) => {
@@ -12,8 +11,7 @@ routes.post('/', (request, response) => {
 
 // List all specifications
 routes.get('/', (request, response) => {
-  const specificationsList = specificationsRepository.list()
-  return response.status(200).json(specificationsList)
+  // return listSpecificationsController.handle(request, response)
 })
 
 export { routes as specificationRoutes }

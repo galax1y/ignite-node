@@ -8,6 +8,15 @@ import { ICreateSpecificationDTO, ISpecificationsRepository } from './ISpecifica
 class SpecificationsRepository implements ISpecificationsRepository {
   private specifications: Specification[]
 
+  // Singleton Design Pattern
+  private static INSTANCE: SpecificationsRepository
+  public static getInstance(): SpecificationsRepository {
+    if (!SpecificationsRepository.INSTANCE) {
+      SpecificationsRepository.INSTANCE = new SpecificationsRepository()
+    }
+    return SpecificationsRepository.INSTANCE
+  }
+  
   constructor() {
     this.specifications = []
   }

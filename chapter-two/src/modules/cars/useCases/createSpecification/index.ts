@@ -6,7 +6,7 @@ import { CreateSpecificationUseCase } from './CreateSpecificationUseCase'
 // O Controller funcionar significa que os requests recebidos na rota vão ser passados para ele
 // Em seguida ele aplica a lógica para realizar a regra de negócio especificada.
 
-const specificationsRepository = new SpecificationsRepository()
+const specificationsRepository = SpecificationsRepository.getInstance()
 
 const createSpecificationUseCase = new CreateSpecificationUseCase(specificationsRepository)
 

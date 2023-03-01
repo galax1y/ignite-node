@@ -34,3 +34,9 @@ Um DTO não possui nenhum outro comportamento além de 'carregar' a informação
 **3. Liskov Substitution Principle**
   - Um objeto de uma superclasse deve poder ser substituído por um objeto de sua subclasse sem quebrar a aplicação ou mudar seu comportamento.
   - Exemplo + prático: Uma interface de banco de dados define contratos que funcionam para diferentes tipos e tecnologias de bancos de dados, mesmo que os diferentes bancos de dados tenham implementações únicas para cada um. Todos podem extender a interface e funcionar.
+
+---
+
+## Singleton Design Pattern
+
+É um design pattern que garante que só exista uma instância de uma classe específica.

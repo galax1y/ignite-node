@@ -1,6 +1,6 @@
 import { CategoriesRepository } from '../../repositories/CategoriesRepository'
-import { CreateCategoryController } from './CreateCategoryController'
-import { CreateCategoryUseCase } from './CreateCategoryUseCase'
+import { ListCategoriesController } from './ListCategoriesController'
+import { ListCategoriesUseCase } from './ListCategoriesUseCase'
 
 // Esse arquivo cria todas as instâncias necessárias para fazer o Controller funcionar
 // O Controller funcionar significa que os requests recebidos na rota vão ser passados para ele
@@ -8,8 +8,8 @@ import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
 const categoriesRepository = CategoriesRepository.getInstance()
 
-const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
+const listCategoriesUseCase = new ListCategoriesUseCase(categoriesRepository)
 
-const createCategoryController = new CreateCategoryController(createCategoryUseCase)
+const listCategoriesController = new ListCategoriesController(listCategoriesUseCase)
 
-export { createCategoryController }
+export { listCategoriesController }

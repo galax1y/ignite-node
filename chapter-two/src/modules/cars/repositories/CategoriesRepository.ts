@@ -7,7 +7,17 @@ import { ICategoriesRepository, ICreateCategoryDTO } from './ICategoriesReposito
 // Importante ressaltar que não é papel dos repositories possuir regras de negócio
 class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[]
+  
+  // Singleton Design Pattern
+  private static INSTANCE: CategoriesRepository
 
+  public static getInstance(): CategoriesRepository {
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository()
+    }
+    return CategoriesRepository.INSTANCE
+  }
+  
   constructor() {
     this.categories = []
   }
