@@ -1,12 +1,13 @@
-import { ISpecificationsRepository } from '../repositories/ISpecificationsRepository'
+import { ISpecificationsRepository } from '../../repositories/ISpecificationsRepository'
 
+// Descreve as informações que o useCase deve receber para executar a sua lógica
 interface IRequest {
   name: string
   description: string
 }
 
-class CreateSpecificationService {
-
+// Contém a parte de validação dos dados e, se for válido, chama o repositório (specificationsRepository) para manipular os dados.
+class CreateSpecificationUseCase {
   constructor(private specificationRepository: ISpecificationsRepository) {}
 
   execute({ name, description } : IRequest): void {
@@ -20,4 +21,4 @@ class CreateSpecificationService {
   }
 }
 
-export { CreateSpecificationService }
+export { CreateSpecificationUseCase }

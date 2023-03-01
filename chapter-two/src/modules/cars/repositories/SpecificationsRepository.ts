@@ -1,7 +1,10 @@
 import { Specification } from '../model/Specification'
 import { ICreateSpecificationDTO, ISpecificationsRepository } from './ISpecificationsRepository'
 
-// Liskov Substitution Principle
+// Liskov Substitution Principle -> 'implements ...'
+
+// Nos repositories os dados são manipulados
+// Importante ressaltar que não é papel dos repositories possuir regras de negócio
 class SpecificationsRepository implements ISpecificationsRepository {
   private specifications: Specification[]
 

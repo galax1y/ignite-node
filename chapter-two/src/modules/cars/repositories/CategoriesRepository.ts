@@ -1,7 +1,10 @@
 import { Category } from '../model/Category'
 import { ICategoriesRepository, ICreateCategoryDTO } from './ICategoriesRepository'
 
-// Liskov Substitution Principle
+// Liskov Substitution Principle -> 'implements ...'
+
+// Nos repositories os dados são manipulados
+// Importante ressaltar que não é papel dos repositories possuir regras de negócio
 class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[]
 
