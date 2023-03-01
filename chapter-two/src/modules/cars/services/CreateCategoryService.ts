@@ -1,4 +1,3 @@
-import { CategoriesRepository } from '../repositories/CategoriesRepository'
 import { ICategoriesRepository } from '../repositories/ICategoriesRepository'
 
 interface IRequest {
@@ -10,7 +9,6 @@ interface IRequest {
 // Uma classe deve ter apenas um motivo para mudar.
 // A única responsabilidade dessa classe é de criar a categoria
 class CreateCategoryService {
-
   // DIP - Dependency Inversion Principle
   // A classe de alto nível não deve depender de uma tecnologia específica, mas sim de abstrações.
   // Nesse caso específico, não deve depender do tipo de banco de dados, mas sim de uma abstração
