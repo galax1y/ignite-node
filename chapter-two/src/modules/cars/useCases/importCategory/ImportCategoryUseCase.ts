@@ -1,6 +1,18 @@
+import fs from 'node:fs'
+import { parse as csvParse } from 'csv-parse'
+
 class ImportCategoryUseCase {
   execute(file: Express.Multer.File): void {
-    console.log("i'm here, file:", file)
+    const stream = fs.createReadStream(file.path)
+
+    const parseFile = csvParse()
+
+    // Função pipe coleta o chunk de dentro do Stream e o envia para o parser
+    stream.pipe(parseFile)
+
+    parseFile.on('data', async (line) => {
+      console.log(line)      
+    })
   }
 }
 
