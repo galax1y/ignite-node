@@ -24,3 +24,39 @@ Comandos:
 
 **`docker ps`**
 Listagem de containers
+
+**`docker exec -it rentx /bin/bash`**
+Acessa os arquivos contidos no container
+
+**`docker logs rentx`**
+Mostra os últimos logs da aplicação
+Adicionandoo comando **`-f`** é possível ficar observando os logs continuamente
+
+**`docker start <container-id>`**
+Roda um container
+
+**`docker rm <container-id>`**
+Remover um container (não pode estar em execução)
+
+## Docker Compose
+
+Ferramenta para orquestração de containers.
+Iniciar, parar, subir e remover um ou mais containers
+
+Quando fazemos alterações no código, com o **`docker-compose`** as alterações são aplicadas imediatamente.
+
+1. Criar o **`docker-compose.yml`** e adicionar as configurações
+2. Usar o comando **`docker-compose up`** ou **`docker-compose up -d`** para rodar em background
+
+Comandos
+**`docker-compose up`**
+Cria o container, aplica tudo o que for necessário e inicia a execução do container
+
+**`docker-compose Start`**
+Inicia a execução do container
+
+**`docker-compose stop`**
+Para a execução do container
+
+**`docker-compose down`**
+Remove o container completamente
