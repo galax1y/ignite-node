@@ -40,3 +40,44 @@ Um DTO não possui nenhum outro comportamento além de 'carregar' a informação
 ## Singleton Design Pattern
 
 É um design pattern que garante que só exista uma instância de uma classe específica.
+
+No caso de um banco de dados in-memory, como tem sido usado no projeto 02, cada vez que a rota de criação era chamada, um array vazio que servia como repository era instanciado e na hora de listar, nada aparece.
+
+Então pra esse caso, foi usado o padrão **`Singleton`** para dizer o seguinte:
+1. Se a classe (que é do tipo repository) não tem uma instância, crie uma e retorne-a.
+2. Se já existir uma instância, basta retorná-la.
+
+```ts
+class CategoriesRepository implements ICategoriesRepository {
+  // Singleton Design Pattern
+  private static INSTANCE: CategoriesRepository
+
+  public static getInstance(): CategoriesRepository {
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository()
+    }
+    return CategoriesRepository.INSTANCE
+  }
+  ...
+}
+```
+
+## Multer
+
+Multer é uma biblioteca voltada para facilitar todo processo de upload e recebimento de arquivos.
+
+Uso básico:
+```ts
+const upload = multer({
+  dest: './tmp',
+})
+...
+routes.post('/import', upload.single('file'), (request, response) => {
+  const { file } = request
+  console.log(file)
+
+  return response.send()
+})
+```
+
+O arquivo vem anexado no request que contém o header `Content-Type: multipart/form-data`
