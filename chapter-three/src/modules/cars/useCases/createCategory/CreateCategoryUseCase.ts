@@ -1,4 +1,5 @@
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'
+import { inject, injectable } from 'tsyringe'
 
 // Descreve as informações que o useCase deve receber para executar a sua lógica
 interface IRequest {
@@ -7,8 +8,14 @@ interface IRequest {
 }
 
 // Contém a parte de validação dos dados e, se for válido, chama o repositório (categoriesRepository) para manipular os dados.
+@injectable()
 class CreateCategoryUseCase {
-  constructor(private categoriesRepository: ICategoriesRepository) {}
+  constructor(
+    // Tsyringe dependency injection
+    @inject("CategoriesRepository")
+    private categoriesRepository: ICategoriesRepository
+
+  ) {}
 
   async execute({ name, description }: IRequest): Promise<void> {
     const categoryAlreadyExists = await this.categoriesRepository.findByName(name)
