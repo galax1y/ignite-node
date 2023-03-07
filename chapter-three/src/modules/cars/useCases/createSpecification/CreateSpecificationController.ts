@@ -5,12 +5,12 @@ import { container } from 'tsyringe'
 // Controller lida com o Request recebido, faz o processamento necessário e envia uma Response adequada
 class CreateSpecificationController {
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body
 
     const createSpecificationUseCase = container.resolve(CreateSpecificationUseCase)
 
-    createSpecificationUseCase.execute({ name, description })
+    await createSpecificationUseCase.execute({ name, description })
   
     return response.status(201).send()
   }
