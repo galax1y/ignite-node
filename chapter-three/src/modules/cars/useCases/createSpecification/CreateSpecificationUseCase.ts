@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe'
 import { ISpecificationsRepository } from '../../repositories/ISpecificationsRepository'
 
 // Descreve as informações que o useCase deve receber para executar a sua lógica
@@ -7,8 +8,12 @@ interface IRequest {
 }
 
 // Contém a parte de validação dos dados e, se for válido, chama o repositório (specificationsRepository) para manipular os dados.
+@injectable()
 class CreateSpecificationUseCase {
-  constructor(private specificationRepository: ISpecificationsRepository) {}
+  constructor(
+    @inject("SpecificationsRepository")
+    private specificationRepository: ISpecificationsRepository
+  ) {}
 
   execute({ name, description } : IRequest): void {
     const specificationAlreadyExists = this.specificationRepository.findByName(name)
