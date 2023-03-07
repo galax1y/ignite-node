@@ -6,7 +6,7 @@ import { ListCategoriesUseCase } from './ListCategoriesUseCase'
 // O Controller funcionar significa que os requests recebidos na rota vão ser passados para ele
 // Em seguida ele aplica a lógica para realizar a regra de negócio especificada.
 
-const categoriesRepository = CategoriesRepository.getInstance()
+const categoriesRepository = null
 
 const listCategoriesUseCase = new ListCategoriesUseCase(categoriesRepository)
 

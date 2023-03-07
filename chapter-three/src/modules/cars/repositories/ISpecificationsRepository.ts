@@ -1,4 +1,4 @@
-import { Specification } from '../model/Specification'
+import { Specification } from '../entities/Specification'
 
 // Liskov Substitution Principle - LSP
 // Criando a estrutura para aplicar princípios do SOLID

@@ -6,10 +6,14 @@ import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 // O Controller funcionar significa que os requests recebidos na rota vão ser passados para ele
 // Em seguida ele aplica a lógica para realizar a regra de negócio especificada.
 
-const categoriesRepository = CategoriesRepository.getInstance()
+export default (): CreateCategoryController => {
+  const categoriesRepository = new CategoriesRepository()
+  
+  const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
+  
+  const createCategoryController = new CreateCategoryController(createCategoryUseCase)
+  
+  return createCategoryController
+}
 
-const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
 
-const createCategoryController = new CreateCategoryController(createCategoryUseCase)
-
-export { createCategoryController }
