@@ -12,7 +12,7 @@ class AuthenticateUserController {
       const authToken = await authenticateUserUseCase.execute({ email, password })
       return response.json(authToken)
     } catch (error) {
-      return response.status(500).json({ error })
+      return response.status(500).json({ error: "Authentication error" })
     }
   }
 }
