@@ -8,7 +8,11 @@ class CreateUserController {
 
     const createUserUseCase = container.resolve(CreateUserUseCase)
 
-    await createUserUseCase.execute({ name, email, password, driver_license })
+    try{ 
+      await createUserUseCase.execute({ name, email, password, driver_license })
+    } catch (error) {
+      return response.status(500).json({ error: "User with this email already exists"})
+    }
     
     return response.status(201).send()
   }
