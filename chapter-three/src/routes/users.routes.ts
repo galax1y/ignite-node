@@ -20,7 +20,7 @@ routes.patch(
 	'/avatar',
 	ensureAuthenticated,
 	uploadAvatar.single('avatar'),
-	updateUserAvatarController.handle,
+	updateUserAvatarController.handle
 )
 
 export { routes as userRoutes }

@@ -4,27 +4,28 @@ import { ISpecificationsRepository } from '../../repositories/ISpecificationsRep
 
 // Descreve as informações que o useCase deve receber para executar a sua lógica
 interface IRequest {
-  name: string
-  description: string
+	name: string
+	description: string
 }
 
 // Contém a parte de validação dos dados e, se for válido, chama o repositório (specificationsRepository) para manipular os dados.
 @injectable()
 class CreateSpecificationUseCase {
-  constructor(
-    @inject("SpecificationsRepository")
-    private specificationRepository: ISpecificationsRepository
-  ) {}
+	constructor(
+		@inject('SpecificationsRepository')
+		private specificationRepository: ISpecificationsRepository
+	) {}
 
-  async execute({ name, description } : IRequest): Promise<void> {
-    const specificationAlreadyExists = await this.specificationRepository.findByName(name)
+	async execute({ name, description }: IRequest): Promise<void> {
+		const specificationAlreadyExists =
+			await this.specificationRepository.findByName(name)
 
-    if (specificationAlreadyExists) {
-      throw new AppError('Specification already exists')
-    }
+		if (specificationAlreadyExists) {
+			throw new AppError('Specification already exists')
+		}
 
-    await this.specificationRepository.create({ name, description })
-  }
+		await this.specificationRepository.create({ name, description })
+	}
 }
 
 export { CreateSpecificationUseCase }

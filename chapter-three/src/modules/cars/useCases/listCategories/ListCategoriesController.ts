@@ -1,17 +1,16 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
-import { ListCategoriesUseCase } from './ListCategoriesUseCase';
+import { Request, Response } from 'express'
+import { container } from 'tsyringe'
+import { ListCategoriesUseCase } from './ListCategoriesUseCase'
 
 // Controller lida com o Request recebido, faz o processamento necessário e envia uma Response adequada
 class ListCategoriesController {
-  
-  async handle(request: Request, response: Response): Promise<Response> {
-    const listCategoriesUseCase = container.resolve(ListCategoriesUseCase)
+	async handle(request: Request, response: Response): Promise<Response> {
+		const listCategoriesUseCase = container.resolve(ListCategoriesUseCase)
 
-    const all = await listCategoriesUseCase.execute()
-    
-    return response.json(all)
-  }
+		const all = await listCategoriesUseCase.execute()
+
+		return response.json(all)
+	}
 }
 
-export { ListCategoriesController}
+export { ListCategoriesController }

@@ -6,13 +6,13 @@ import { Specification } from '../entities/Specification'
 // funcionalidades e seguir o 'contrato' definido por essas interfaces
 
 interface ICreateSpecificationDTO {
-  name: string
-  description: string
+	name: string
+	description: string
 }
 
 interface ISpecificationsRepository {
-  create({ name, description }: ICreateSpecificationDTO): Promise<void>
-  findByName(name: string): Promise<Specification>
+	create({ name, description }: ICreateSpecificationDTO): Promise<void>
+	findByName(name: string): Promise<Specification>
 }
 
 export { ISpecificationsRepository, ICreateSpecificationDTO }
