@@ -1,5 +1,6 @@
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'
 import { inject, injectable } from 'tsyringe'
+import { AppError } from '../../../../errors/AppError'
 
 // Descreve as informações que o useCase deve receber para executar a sua lógica
 interface IRequest {
@@ -21,7 +22,7 @@ class CreateCategoryUseCase {
     const categoryAlreadyExists = await this.categoriesRepository.findByName(name)
 
     if (categoryAlreadyExists) {
-      throw new Error("Category already exists")
+      throw new AppError("Category already exists")
     }
   
     await this.categoriesRepository.create({ name, description })

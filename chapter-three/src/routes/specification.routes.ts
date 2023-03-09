@@ -1,16 +1,14 @@
 import { Router } from 'express'
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { CreateSpecificationController } from '../modules/cars/useCases/createSpecification/CreateSpecificationController'
 
 const routes = Router()
 
 const createSpecificationController = new CreateSpecificationController()
 
+routes.use(ensureAuthenticated)
+
 // Create specification
 routes.post('/', createSpecificationController.handle)
-
-// List all specifications
-routes.get('/', (request, response) => {
-  // return listSpecificationsController.handle(request, response)
-})
 
 export { routes as specificationRoutes }
